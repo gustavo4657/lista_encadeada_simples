@@ -42,17 +42,67 @@ void Imprime(TipoLista Lista) {
 
 void RetiraUltimo(TipoLista *Lista, TipoItem *Item) {
     /* IMPLEMENTAR */
+    TipoApontador Aux, Ultimo;
+    if (Lista->Primeiro == Lista->Ultimo) {
+        return 0;
+    }
+    Aux = Lista->Primeiro;
+    
+    while (Aux->Prox != Lista->Ultimo) {
+        Aux = Aux->Prox;
+    }
+    Ultimo = Lista->Ultimo;
+    *Item = Ult->Item;
+    Aux->Prox = NULL;
+    Lista->Ultimo = Aux;
+    free(Ultimo);
+    return 1;
 }
 
 void InsereInicio(TipoItem x, TipoLista *Lista) {
     /* IMPLEMENTAR */
+    TipoApontador novo;
+    novo = (TipoApontador) malloc(sizeof(TipoCelula));
+    if (Nova == NULL) {
+        printf("Erro: memoria insuficiente.\n");
+        return;
+    }
+    novo->Item = x;
+    novo->Prox = Lista->Primeiro->Prox;
+    Lista->Primeiro->Prox = novo;
+    if (Lista->Ultimo == Lista->Primeiro) {
+        Lista->Ultimo = novo;
+    }
 }
 
 void Inverte(TipoLista *Lista) {
     /* IMPLEMENTAR */
+    TipoApontador Ant, Atual, Prox;
+
+    if (Lista->Primeiro->Prox == NULL || Lista->Primeiro->Prox->Prox == NULL) {
+        return;
+    }
+    Ant = NULL;
+    Atual = Lista->Primeiro->Prox;
+
+    Lista->Ultimo = Atual;
+
+    while (Atual != NULL) {
+        Prox = Atual->Prox;
+        Atual->Prox = Ant;
+        Ant = Atual;
+        Atual = Prox;
+    }
+    Lista->Primeiro->Prox = Ant;
 }
 
 int Tamanho(TipoLista *Lista) {
     /* IMPLEMENTAR */
-    return XXX;
+        int count = 0;
+    TipoApontador Aux = Lista->Primeiro->Prox;
+    while (Aux != NULL) {
+        count++;
+        Aux = Aux->Prox;
+    }
+    return count;
 }
